@@ -1,8 +1,32 @@
 # YOLO DETECTOR
 
+[![Tests](https://github.com/kinncj/yolo-detector/actions/workflows/test.yml/badge.svg)](https://github.com/kinncj/yolo-detector/actions/workflows/test.yml)
+[![Lint](https://github.com/kinncj/yolo-detector/actions/workflows/lint.yml/badge.svg)](https://github.com/kinncj/yolo-detector/actions/workflows/lint.yml)
+[![CI](https://github.com/kinncj/yolo-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/kinncj/yolo-detector/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/kinncj/yolo-detector/branch/main/graph/badge.svg)](https://codecov.io/gh/kinncj/yolo-detector)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
 **Multi-model YOLO testing and comparison framework for object detection.**
 
 Test and compare multiple YOLO versions (YOLO8, YOLO9, YOLO10, YOLO11, YOLO12, YOLO26) with support for critical object marking, multi-GPU acceleration, and batch processing across diverse hardware platforms.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Architecture](#architecture)
+- [Critical Classes](#critical-classes)
+- [Supported Platforms](#supported-platforms)
+- [Performance](#performance)
+- [Documentation](#documentation)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -65,6 +89,40 @@ Annotated videos saved as:
 - `<prefix>_<model>_detected.mp4`
 
 Critical detections logged with timestamps and confidence scores.
+
+---
+
+## Installation
+
+### Prerequisites
+
+- Python 3.10 or 3.11
+- Conda or Miniconda (recommended for environment management)
+- FFmpeg (for video processing)
+
+### Step 1: Create Environment
+
+Choose the environment file matching your platform from the [Supported Platforms](#supported-platforms) table.
+
+```bash
+# Example: Apple Silicon Mac
+conda env create -f environment-apple-silicon.yml
+conda activate yolodetector-apple-silicon
+```
+
+### Step 2: Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 3: Verify Installation
+
+```bash
+python main.py --help
+```
+
+For detailed platform-specific setup instructions, see [docs/setup.md](docs/setup.md).
 
 ---
 
@@ -223,6 +281,22 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+## Documentation
+
+Comprehensive guides are available in the `docs/` directory:
+
+- **[Architecture Guide](docs/architecture.md)** - Design principles, agent responsibilities, and system architecture
+- **[CLI Reference](docs/cli-reference.md)** - Complete command-line flag reference
+- **[Configuration Guide](docs/configuration.md)** - Advanced configuration options and tuning
+- **[Development Guide](docs/development.md)** - Contributing, testing, and development workflow
+- **[Setup Guide](docs/setup.md)** - Platform-specific installation and environment setup
+- **[Troubleshooting](docs/troubleshooting.md)** - Common issues, solutions, and debugging tips
+- **[Usage Guide](docs/usage.md)** - Detailed usage examples and workflows
+
+For project guidance and design principles, see [CLAUDE.md](CLAUDE.md) and [AGENTS.md](AGENTS.md).
 
 ---
 
