@@ -1,0 +1,25 @@
+name: yolodetector-dgx-spark
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11
+  - pip
+  - pytorch::pytorch
+  - pytorch::pytorch-cuda=12.1
+  - pytorch::torchvision
+  - pytorch::pytorch-lightning
+  - cuda-toolkit=12.1
+  - cudnn
+  - nccl
+  - numpy
+  - opencv
+  - tqdm
+  - pip-tools
+  - pip:
+    - ultralytics>=8.1.0
+    - opencv-python
+    - tqdm
+    - numpy
+    - pyspark>=3.4.0
+    - horovod[pytorch-cuda12.1]

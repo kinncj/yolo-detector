@@ -1,0 +1,21 @@
+name: yolodetector-apple-silicon
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11
+  - pip
+  - pytorch::pytorch::*=*cuda-none*
+  - pytorch::pytorch-cpu
+  - pytorch::torchvision
+  - pytorch::pytorch-lightning
+  - pytorch::pytorch-cuda
+  - numpy
+  - opencv
+  - tqdm
+  - pip-tools
+  - pip:
+    - ultralytics>=8.1.0
+    - opencv-python
+    - tqdm
+    - numpy

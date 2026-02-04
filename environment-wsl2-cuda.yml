@@ -1,0 +1,22 @@
+name: yolodetector-wsl2-cuda
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11
+  - pip
+  - pytorch::pytorch
+  - pytorch::pytorch-cuda=12.1
+  - pytorch::torchvision
+  - pytorch::pytorch-lightning
+  - cuda-toolkit=12.1
+  - cudnn
+  - numpy
+  - opencv
+  - tqdm
+  - pip-tools
+  - pip:
+    - ultralytics>=8.1.0
+    - opencv-python
+    - tqdm
+    - numpy

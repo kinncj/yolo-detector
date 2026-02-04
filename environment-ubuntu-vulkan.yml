@@ -1,0 +1,22 @@
+name: yolodetector-ubuntu-vulkan
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11
+  - pip
+  - pytorch::pytorch-cpu
+  - pytorch::torchvision
+  - pytorch::pytorch-lightning
+  - numpy
+  - opencv
+  - tqdm
+  - vulkan-loader
+  - vulkan-tools
+  - pip-tools
+  - pip:
+    - ultralytics>=8.1.0
+    - opencv-python
+    - opencv-contrib-python
+    - tqdm
+    - numpy

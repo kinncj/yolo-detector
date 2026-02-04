@@ -1,0 +1,30 @@
+# Model weights
+*.pt
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Output
+output/
+kinn_test/output/
+
+# Testing / tooling
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+coverage.xml
+bandit-report.json
+.tox/
+
+# Packaging / envs
+venv/
+.venv/
+*.egg-info/
+dist/
+build/

@@ -1,0 +1,58 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install black isort pylint mypy bandit safety
+
+      - name: Check formatting with black
+        run: |
+          black --check yolodetector/ main.py tests/ --line-length=120
+
+      - name: Check import sorting with isort
+        run: |
+          isort --check yolodetector/ main.py tests/ --profile=black --line-length=120
+
+      - name: Lint with pylint
+        run: |
+          pylint yolodetector/ main.py --max-line-length=120 --fail-under=8.0
+        continue-on-error: true
+
+      - name: Type check with mypy
+        run: |
+          mypy yolodetector/ main.py --ignore-missing-imports
+        continue-on-error: true
+
+      - name: Security check with bandit
+        run: |
+          bandit -r yolodetector/ -f json -o bandit-report.json
+        continue-on-error: true
+
+      - name: Upload bandit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: bandit-report.json
