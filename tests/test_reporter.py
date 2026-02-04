@@ -1,6 +1,7 @@
 """Tests for yolodetector.reporting.summary."""
 
 import pytest
+
 from yolodetector.reporting.summary import ReportAggregator, VideoReport
 
 
@@ -22,7 +23,7 @@ class TestReportAggregator:
         return VideoReport(
             detections={"person": 100, "cell phone": 5},
             criticals=[(10, "cell phone", 0.92, (150, 150, 250, 250))],
-            output_path="output/test_detected.mp4"
+            output_path="output/test_detected.mp4",
         )
 
     def test_record_video(self, aggregator, sample_report):
@@ -71,7 +72,7 @@ class TestExportJson:
         return VideoReport(
             detections={"person": 100, "cell phone": 5},
             criticals=[(10, "cell phone", 0.92, (150, 150, 250, 250))],
-            output_path="output/test_detected.mp4"
+            output_path="output/test_detected.mp4",
         )
 
     def test_export_creates_file(self, aggregator, sample_report, tmp_path):
@@ -82,6 +83,7 @@ class TestExportJson:
 
     def test_export_json_content(self, aggregator, sample_report, tmp_path):
         import json
+
         aggregator.record_video("test.mp4", sample_report)
         output = tmp_path / "report.json"
         aggregator.export_json(str(output), 10.5)

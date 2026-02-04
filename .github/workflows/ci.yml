@@ -20,11 +20,10 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: '3.11'
-          miniforge-variant: Mambaforge
+          miniforge-variant: Miniforge3
           miniforge-version: latest
           use-mamba: true
           activate-environment: yolodetector-ci
-          auto-activate-base: false
 
       - name: Install dependencies
         shell: bash -l {0}

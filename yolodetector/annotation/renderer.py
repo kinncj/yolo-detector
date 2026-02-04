@@ -1,7 +1,8 @@
 """Frame annotation utilities."""
 
-from collections import defaultdict
 import logging
+from collections import defaultdict
+
 import cv2
 import numpy as np
 
@@ -18,11 +19,14 @@ class FrameAnnotator:
 
     def draw_critical_icon(self, frame, x, y, size=24):
         half = size // 2
-        pts = np.array([
-            [x + half, y],
-            [x, y + size],
-            [x + size, y + size],
-        ], dtype=np.int32)
+        pts = np.array(
+            [
+                [x + half, y],
+                [x, y + size],
+                [x + size, y + size],
+            ],
+            dtype=np.int32,
+        )
 
         cv2.fillPoly(frame, [pts], self._config.critical_icon_color_bgr)
         cv2.polylines(frame, [pts], True, (0, 0, 0), 2, cv2.LINE_AA)
@@ -34,8 +38,7 @@ class FrameAnnotator:
         text_size = cv2.getTextSize(text, font, font_scale, font_thickness)[0]
         text_x = x + (size - text_size[0]) // 2
         text_y = y + size - 4
-        cv2.putText(frame, text, (text_x, text_y), font, font_scale,
-                    (0, 0, 0), font_thickness, cv2.LINE_AA)
+        cv2.putText(frame, text, (text_x, text_y), font, font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
 
         return frame
 
@@ -43,9 +46,7 @@ class FrameAnnotator:
         font = cv2.FONT_HERSHEY_SIMPLEX
         font_scale = 0.6
         font_thickness = 2
-        (text_width, text_height), baseline = cv2.getTextSize(
-            text, font, font_scale, font_thickness
-        )
+        (text_width, text_height), baseline = cv2.getTextSize(text, font, font_scale, font_thickness)
 
         padding = 4
         bg_color = (40, 40, 40)
@@ -119,5 +120,7 @@ class FrameAnnotator:
                     cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness, cv2.LINE_AA)
                     self.draw_label_with_background(frame, label, x1, y1 - 5, color, thickness)
 
-        logger.debug("Frame annotated: %d detections, %d critical", sum(detections_summary.values()), len(critical_detected))
+        logger.debug(
+            "Frame annotated: %d detections, %d critical", sum(detections_summary.values()), len(critical_detected)
+        )
         return frame, detections_summary, critical_detected

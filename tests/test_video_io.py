@@ -1,9 +1,11 @@
 """Tests for yolodetector.video.io."""
 
-import pytest
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
 import cv2
+import pytest
+
 from yolodetector.video.io import VideoIO, VideoProperties
 
 
@@ -32,7 +34,7 @@ class TestVideoIOOpenCapture:
             cv2.CAP_PROP_FRAME_COUNT: 900,
         }[prop]
 
-        with patch('yolodetector.video.io.cv2.VideoCapture', return_value=mock_cap):
+        with patch("yolodetector.video.io.cv2.VideoCapture", return_value=mock_cap):
             vio = VideoIO()
             cap, props = vio.open_capture(Path("test.mp4"))
             assert props.width == 1920
@@ -42,7 +44,7 @@ class TestVideoIOOpenCapture:
         mock_cap = MagicMock()
         mock_cap.isOpened.return_value = False
 
-        with patch('yolodetector.video.io.cv2.VideoCapture', return_value=mock_cap):
+        with patch("yolodetector.video.io.cv2.VideoCapture", return_value=mock_cap):
             vio = VideoIO()
             with pytest.raises(FileNotFoundError, match="Could not open video file"):
                 vio.open_capture(Path("nonexistent.mp4"))
@@ -57,7 +59,7 @@ class TestVideoIOOpenCapture:
             cv2.CAP_PROP_FRAME_COUNT: 100,
         }[prop]
 
-        with patch('yolodetector.video.io.cv2.VideoCapture', return_value=mock_cap):
+        with patch("yolodetector.video.io.cv2.VideoCapture", return_value=mock_cap):
             vio = VideoIO()
             _, props = vio.open_capture(Path("test.mp4"))
             assert props.fps == 30.0  # fallback
@@ -68,8 +70,9 @@ class TestVideoIOCreateWriter:
         mock_writer = MagicMock()
         mock_writer.isOpened.return_value = True
 
-        with patch('yolodetector.video.io.cv2.VideoWriter', return_value=mock_writer), \
-             patch('yolodetector.video.io.cv2.VideoWriter_fourcc', return_value=0x7634706D):
+        with patch("yolodetector.video.io.cv2.VideoWriter", return_value=mock_writer), patch(
+            "yolodetector.video.io.cv2.VideoWriter_fourcc", return_value=0x7634706D
+        ):
             vio = VideoIO()
             props = VideoProperties(width=1920, height=1080, fps=30.0, total_frames=900)
             writer = vio.create_writer(Path("output.mp4"), props, "mp4v")
@@ -79,8 +82,9 @@ class TestVideoIOCreateWriter:
         mock_writer = MagicMock()
         mock_writer.isOpened.return_value = False
 
-        with patch('yolodetector.video.io.cv2.VideoWriter', return_value=mock_writer), \
-             patch('yolodetector.video.io.cv2.VideoWriter_fourcc', return_value=0x7634706D):
+        with patch("yolodetector.video.io.cv2.VideoWriter", return_value=mock_writer), patch(
+            "yolodetector.video.io.cv2.VideoWriter_fourcc", return_value=0x7634706D
+        ):
             vio = VideoIO()
             props = VideoProperties(width=1920, height=1080, fps=30.0, total_frames=900)
             with pytest.raises(RuntimeError, match="Could not create video writer"):

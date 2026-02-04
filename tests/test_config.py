@@ -1,8 +1,10 @@
 """Tests for yolodetector.config."""
 
-import pytest
 from pathlib import Path
-from yolodetector.config import DetectionConfig, VideoConfig, AnnotationConfig, ApplicationConfig
+
+import pytest
+
+from yolodetector.config import AnnotationConfig, ApplicationConfig, DetectionConfig, VideoConfig
 
 
 class TestDetectionConfig:

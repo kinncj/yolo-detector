@@ -30,16 +30,10 @@ from pathlib import Path
 from tqdm import tqdm
 
 from yolodetector.annotation.renderer import FrameAnnotator
-from yolodetector.config import (
-    AnnotationConfig,
-    ApplicationConfig,
-    DetectionConfig,
-    VideoConfig,
-)
+from yolodetector.config import AnnotationConfig, ApplicationConfig, DetectionConfig, VideoConfig
 from yolodetector.models.detector import YoloDetector
 from yolodetector.reporting.summary import ReportAggregator, VideoReport
 from yolodetector.video.io import VideoIO
-
 
 DEFAULT_APP = ApplicationConfig.create_default()
 
@@ -49,7 +43,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="YOLO Object Detection with Critical Object Marking",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog='''
+        epilog="""
 Examples:
   # Process only main video (default)
   python main.py
@@ -59,10 +53,11 @@ Examples:
 
   # Same as above
   python main.py --include-cameras
-        '''
+        """,
     )
     parser.add_argument(
-        "--all", "--include-cameras",
+        "--all",
+        "--include-cameras",
         dest="include_cameras",
         action="store_true",
         help="Include FACE and TOP camera videos (default: main video only)",
@@ -152,8 +147,14 @@ def build_config(args: argparse.Namespace) -> ApplicationConfig:
     return ApplicationConfig(detection=detection, video=video, annotation=annotation)
 
 
-def process_video(detector: YoloDetector, annotator: FrameAnnotator, video_io: VideoIO,
-                  input_path: Path, output_path: Path, app_config: ApplicationConfig):
+def process_video(
+    detector: YoloDetector,
+    annotator: FrameAnnotator,
+    video_io: VideoIO,
+    input_path: Path,
+    output_path: Path,
+    app_config: ApplicationConfig,
+):
     print(f"\n{'=' * 70}")
     print(f"Processing: {input_path.name}")
     print(f"{'=' * 70}")

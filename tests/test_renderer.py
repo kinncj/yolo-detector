@@ -1,7 +1,8 @@
 """Tests for yolodetector.annotation.renderer."""
 
-import pytest
 import numpy as np
+import pytest
+
 from yolodetector.annotation.renderer import FrameAnnotator
 from yolodetector.config import AnnotationConfig
 

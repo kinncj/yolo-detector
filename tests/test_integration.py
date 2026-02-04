@@ -1,10 +1,12 @@
 """Integration tests across modules."""
 
-import pytest
+from unittest.mock import MagicMock, patch
+
 import numpy as np
-from unittest.mock import patch, MagicMock
-from yolodetector.config import ApplicationConfig, AnnotationConfig
+import pytest
+
 from yolodetector.annotation.renderer import FrameAnnotator
+from yolodetector.config import AnnotationConfig, ApplicationConfig
 from yolodetector.reporting.summary import ReportAggregator, VideoReport
 
 

@@ -1,9 +1,9 @@
 """Detection reporting utilities."""
 
-from collections import defaultdict
-from dataclasses import dataclass, field
 import json
 import logging
+from collections import defaultdict
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -47,7 +47,9 @@ class ReportAggregator:
 
     def print_final_summary(self, total_time: float):
         total_criticals = sum(len(v.criticals) for v in self._videos.values())
-        logger.info("Final summary: %d videos, %.1fs, %d total criticals", len(self._videos), total_time, total_criticals)
+        logger.info(
+            "Final summary: %d videos, %.1fs, %d total criticals", len(self._videos), total_time, total_criticals
+        )
 
         print("\n" + "=" * 70)
         print("PROCESSING COMPLETE")
@@ -70,7 +72,7 @@ class ReportAggregator:
             "total_time_seconds": round(total_time, 2),
             "videos_processed": len(self._videos),
             "total_criticals": sum(len(v.criticals) for v in self._videos.values()),
-            "videos": {}
+            "videos": {},
         }
         for video_name, report in self._videos.items():
             data["videos"][video_name] = {

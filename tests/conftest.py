@@ -1,9 +1,11 @@
 """Shared test fixtures."""
 
-import pytest
-import numpy as np
 from unittest.mock import MagicMock
-from yolodetector.config import AnnotationConfig, DetectionConfig, VideoConfig, ApplicationConfig
+
+import numpy as np
+import pytest
+
+from yolodetector.config import AnnotationConfig, ApplicationConfig, DetectionConfig, VideoConfig
 
 
 @pytest.fixture

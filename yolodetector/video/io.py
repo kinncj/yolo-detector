@@ -3,6 +3,7 @@
 import logging
 from dataclasses import dataclass
 from pathlib import Path
+
 import cv2
 
 logger = logging.getLogger(__name__)
@@ -35,7 +36,9 @@ class VideoIO:
             fps = 30.0
 
         props = VideoProperties(width=width, height=height, fps=fps, total_frames=total_frames)
-        logger.debug("Video properties: %dx%d @ %.1f FPS, %d frames", props.width, props.height, props.fps, props.total_frames)
+        logger.debug(
+            "Video properties: %dx%d @ %.1f FPS, %d frames", props.width, props.height, props.fps, props.total_frames
+        )
         return cap, props
 
     def create_writer(self, output_path: Path, props: VideoProperties, codec: str):
